@@ -1,0 +1,12 @@
+Data da última transação capturada: 07/03/2021 | 03:48:02
+
+=========== REVEL ===========
+Revel: 875
+Quantidade de vezes: 5
+=========== VENDAS E COMPRA ===========
+Quantidade total comprada: -230750
+Quantidade total vendida: 234450
+-----------------------------------------
+Média mensal vendida: 76817
+Média semanal vendida: 20945
+Média diária vendida: 5761
