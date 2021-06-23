@@ -25,7 +25,7 @@ class FileManager:
         string += f'Revel: {total_revel_tcs}\n'
         string += f'Quantidade de vezes: {amount_transactions_revel}\n'
         string += '=========== VENDAS E COMPRA ===========\n'
-        string += f'Quantidade total comprada: {purchased_value}\n'
+        string += f'Quantidade total comprada: {abs(purchased_value)}\n'
         string += f'Quantidade total vendida: {value_sold}\n'
         string += '-----------------------------------------\n'
         string += f'Média mensal vendida: {round(monthly_average_selled)}\n'

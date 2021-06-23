@@ -38,8 +38,8 @@ class StatisticsGenerator:
                     stop_loop = True
                     break
                 else:
-                    date_resulted = current_transaction.date - next_transaction.date
-                    if date_resulted.days <= number_days:
+                    date_resulted = list_transactions_of_period[0].date - next_transaction.date
+                    if date_resulted.days < number_days:
                         list_transactions_of_period.append(next_transaction)
                     else:
                         current_index = iterable_index
@@ -47,10 +47,12 @@ class StatisticsGenerator:
                         break
         return list_all_transactions_sells_by_days
 
-    def __average_list_transaction(self, sum_transactions_by_period, amount):
+    @staticmethod
+    def __average_list_transaction(sum_transactions_by_period, amount):
         return sum(sum_transactions_by_period) / amount
 
-    def __generate_sum_transactions_of_period(self, transactions_selled_per_period: list) -> list:
+    @staticmethod
+    def __generate_sum_transactions_of_period(transactions_selled_per_period: list) -> list:
         list_sums = []
         for list_transaction in transactions_selled_per_period:
             transaction_list_value = []
@@ -74,8 +76,6 @@ class StatisticsGenerator:
         total_revel_tcs = sum(revel_tcs)
         purchased_value = self.sum_transactions(self.__transactions_sell)
         value_sold = abs(self.sum_transactions(self.__transactions_buy))
-        number_of_transactions_sell = len(self.__transactions_sell)
-        number_of_transactions_buy = len(self.__transactions_buy)
         sellings_by_month = self.__get_list_transactions_sell_by_number_days(30)
         sellings_by_week = self.__get_list_transactions_sell_by_number_days(7)
         sellings_by_day = self.__get_list_transactions_sell_by_number_days(1)
@@ -89,10 +89,9 @@ class StatisticsGenerator:
         week_average_selled = self.__average_list_transaction(sum_transactions_selled_per_week, number_of_weeks)
         day_average_selled = self.__average_list_transaction(sum_transactions_selled_per_day, number_of_days)
 
-        OutputManager.generate_output(revel_tcs, amount_transactions_revel, total_revel_tcs, purchased_value,
-                                      value_sold, number_of_transactions_sell, number_of_transactions_buy,
-                                      number_of_months,
-                                      number_of_weeks, number_of_days, sum_transactions_selled_per_month,
-                                      sum_transactions_selled_per_week, sum_transactions_selled_per_day,
+        OutputManager.generate_output(sum_transactions_selled_per_day, sum_transactions_selled_per_week,
+                                      sum_transactions_selled_per_month, amount_transactions_revel,
+                                      total_revel_tcs, purchased_value,
+                                      value_sold,
                                       monthly_average_selled, week_average_selled, day_average_selled,
                                       str(self.__last_date))
